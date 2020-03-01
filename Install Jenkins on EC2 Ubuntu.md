@@ -1,3 +1,24 @@
+# Before Install Jenkins, make sure Java has been Installed and Path with on location
+
+### Check Java version
+	java -version
+## Install JDK if Java is not installed yet :
+	sudo apt install default-jdk
+## Confirm Java :
+	java -version
+	find / -name javac
+Copy /usr/lib/jvm/java-8-openjdk-amd64 !
+
+### Put Java PATH on .profile
+	ls -la
+	vi .profile
+## Paste this :
+	
+	JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+	PATH=$PATH:$JAVA_HOME:$HOME/bin
+	
+	export PATH
+------------------------
 # Installing Jenkins:
 
 ### First, we’ll add the repository key to the system, run the below command from your terminal :
