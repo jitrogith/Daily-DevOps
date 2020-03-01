@@ -7,17 +7,8 @@
 ## Confirm Java :
 	java -version
 	find / -name javac
-Copy /usr/lib/jvm/java-8-openjdk-amd64 !
+Copy /usr/lib/jvm/java-8-openjdk-amd64 for Java plugin on Jenkins !
 
-### Put Java PATH on .profile
-	ls -la
-	vi .profile
-## Paste this :
-	
-	JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-	PATH=$PATH:$JAVA_HOME:$HOME/bin
-	
-	export PATH
 ------------------------
 # Installing Jenkins:
 
