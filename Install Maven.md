@@ -1,8 +1,8 @@
 # Install Maven :
 
-### Create Maven Folder :
-    mkdir opt/maven
-    cd opt/maven
+### Got to folder "opt", then Create Maven Folder [opt/maven]:
+    mkdir maven
+    cd maven
 
 ### Install wget :
     sudo apt install wget
@@ -15,7 +15,12 @@
   
 ### Go in to Maven Path  
     cd apache-maven-3.6.3-bin.tar.gz/bin
-    pwd
-  
-### Copy That Path !
-  
+So, this is the Maven Path
+
+### Go to root folder, then create maven.sh file !
+    cd etc/profile.d
+    touch maven.sh
+    vim maven.sh
+        
+        export M2_HOME=/opt/maven
+        export PATH=${M2_HOME}/bin:${PATH}
