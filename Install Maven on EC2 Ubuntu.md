@@ -2,7 +2,9 @@
 
 ### Maven Install :
     apt install maven
-    
-### Test Maven :
+Test Maven :
     mvn -v
     
+### On Jenkins, install these Plugin :
+- Maven Integration Plugin
+- Maven Invoker Plugin
