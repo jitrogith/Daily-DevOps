@@ -49,3 +49,21 @@ Install Ansible on it !
     "ping": "pong"
     }
 
+### Create Username & Password:
+    useradd ansible
+    passwd ansible
+
+### Add User&Pwd to system:
+    visudo
+##### Add this user :
+    ansible     ALL=(ALL)   NOPASSWD: ALL
+    
+### Enable PasswordAuthentication by activate it (change 'no' to 'yes'):
+    cd ..
+    vim etc/ssh/sshd_config
+            PasswordAuthentication yes
+##### Restart sshd:
+    service sshd restart
+    
+    
+            
