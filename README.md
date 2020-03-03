@@ -6,6 +6,11 @@
 
 ## Step 2:
 ### Install Java, Jenkins, and Git on Ubuntu
+#### Install these plugin on Jenkins :
+    Maven Integration Plugin
+    Maven Invoker Plugin
+    Deploy to Container
+    Publish over SSH
 
 ## Step 3:
 ### Install Maven on Ubuntu & Maven Plugins on Jenkins
