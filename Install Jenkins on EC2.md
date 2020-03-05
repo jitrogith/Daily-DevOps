@@ -12,17 +12,14 @@ Copy /usr/lib/jvm/java-8-openjdk-amd64 for Java plugin on Jenkins !
 ------------------------
 # Installing Jenkins:
 
-### First, we’ll add the repository key to the system, run the below command from your terminal :
-	wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
+### Linux:
+##### RedHat, Fedora, CentOS:
+	https://pkg.jenkins.io/redhat-stable/
+##### Ubuntu & Debian
+	https://pkg.jenkins.io/debian-stable/
 
-### Next, we’ll append the Debian package repository address to the server’s sources.list:
-	echo deb https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list
-
-### Let’s run a system update:
-	sudo apt-get update
-
-### Now let’s install Java (must be installed first) and Jenkins :
-	sudo apt-get install openjdk-8-jdk jenkins -y
+### Others (Windows, MacOS, etc)
+	https://jenkins.io/download
 
 ### After it has been installed successfully, we will start the jenkins service using the following commands :
 	sudo systemctl start jenkins
