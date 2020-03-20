@@ -1,9 +1,10 @@
 # Before Install Jenkins, make sure Java has been Installed and Path with on location
 
 ### Check Java version
+	sudo su -
 	java -version
 ## Install JDK if Java is not installed yet :
-	sudo apt install default-jdk
+	yum install java-1.8*
 ## Confirm Java :
 	java -version
 	find / -name javac
