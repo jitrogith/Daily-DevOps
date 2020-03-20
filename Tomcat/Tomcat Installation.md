@@ -40,4 +40,7 @@
 
 ### Then try to login in to manager by click "Manager App" on the right top corner.
 Put username="admin" password="admin"
-Succeed !
+Succeed !!!
+
+Don't forget to install "Deploy to Container" Plugin on Jenkins !
+
