@@ -1,11 +1,12 @@
-# Install Ansible on Controller & Host
-## (Ansible for Host only STEP 1)
-#### STEP 1
+# Install Ansible
+
+#### Update Server
     yum update -y
-##### Please check the RPM updated version on https://dl.fedoraproject.org/pub/epel :     
-    rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
+##### Install Python & pip:
+    yum install python
+    yum install python-pip
 ##### Install Ansible & Check version :    
-    yum install ansible
+    pip install ansible
     ansible --version
 ##### Add User & Pwd :
     adduser ansadmin
@@ -46,3 +47,6 @@
     ansible all -m service -a "name=httpd state=started" -b
 ###### Test on Host :
     service httpd status
+
+#### Change User Credential from 'root' to 'ansadmin'
+    chown -R ansadmin:ansadmin {folder}
