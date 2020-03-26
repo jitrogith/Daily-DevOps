@@ -16,14 +16,14 @@
 ### Go in to Maven Path  
     cd apache-maven-3.6.3-bin.tar.gz/bin
     pwd
-        /opt/maven/apache-maven-3.6.3-bin.tar.gz
+        /opt/maven/apache-maven-3.6.3
 So, this is the Maven Path
 
 ### IF YOU find .bash_profile on root:
     vi .bash_profile
     
         JAVA_HOME={JAVA_HOME}                               #Put JAVA_HOME inside the {} like on Maven below !
-        M2_HOME=/opt/maven/apache-maven-3.6.3-bin.tar.gz
+        M2_HOME=/opt/maven/apache-maven-3.6.3
         M2=$M2_HOME/bin
         
         PATH=$PATH:$JAVA_HOME:$M2_HOME:$M2:$HOME/bin
