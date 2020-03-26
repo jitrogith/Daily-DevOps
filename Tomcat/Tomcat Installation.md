@@ -1,7 +1,7 @@
 # Install Tomcat
 
 ### Install Java
-	apt install default-jre
+	yum install java-1.8*
 	java -version
 
 ### Download Tomcat Installer
@@ -14,9 +14,8 @@
 ### Move Tomcat to tomcat folder
 	mv apache-tomcat-9.0.31.tar.gz tomcat
 	
-	cd apache-tomcat-9.0.31.tar.gz
-	cd bin
-	ls
+	cd tomcat/bin
+	chmod +x startup.sh
 	./startup.sh
 
 ### Access Tomcat server from browser, by type (for example 10.10.10.10):
