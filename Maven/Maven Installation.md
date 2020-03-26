@@ -1,7 +1,7 @@
 # Install Maven :
 
-### Got to folder "opt", then Create Maven Folder [opt/maven]:
-    mkdir maven
+### Create Maven Folder [opt/maven]:
+    mkdir /opt/maven
     cd maven
 
 ### Install wget :
