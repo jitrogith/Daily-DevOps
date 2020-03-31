@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coel-deployment
+spec:
+  selector:
+    matchLabels:
+      app: coel-devops-project
+  replicas: 2 # set 2 pods run on template
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+
+  template:
+    metadata:
+      labels:
+        app: coel-devops-project
+    spec:
+      containers:
+      - name: coel-devops-project
+        image: rootdock/dock-img
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
