@@ -6,4 +6,4 @@
 
   tasks:
   - name: create a service
-    command: kubectl apply -f service-coel.yml
+    command: kubectl apply -f k8s-coel-service.yml
