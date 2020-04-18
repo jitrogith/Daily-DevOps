@@ -20,24 +20,24 @@
        aws configure
 ####  7. Create a Route53 private hosted zone (you can create Public hosted zone if you have a domain)
        Routeh53 --> hosted zones --> created hosted zone  
-       Domain Name: valaxy.net
+       Domain Name: jitrobittikaka.com
        Type: Private hosted zone for Amzon VPC
 ####  8. Create an S3 bucket
-       aws s3 mb s3://demo.k8s.valaxy.net
+       aws s3 mb s3://demo.k8s.jitrobittikaka.com
 ####  9. Expose environment variable:
-       export KOPS_STATE_STORE=s3://demo.k8s.valaxy.net
+       export KOPS_STATE_STORE=s3://demo.k8s.jitrobittikaka.com
 #### 10. Create sshkeys before creating cluster
        ssh-keygen
 #### 11. Create kubernetes cluster definitions on S3 bucket
-       kops create cluster --cloud=aws --zones=ap-south-1b --name=demo.k8s.valaxy.net --dns-zone=valaxy.net --dns private 
+       kops create cluster --cloud=aws --zones=ap-south-1b --name=demo.k8s.jitrobittikaka.com --dns-zone=jitrobittikaka.com --dns private 
 #### 12. Create kubernetes cluser
-       kops update cluster demo.k8s.valaxy.net --yes
+       kops update cluster demo.k8s.jitrobittikaka.com --yes
 #### 13. Validate your cluster
        kops validate cluster
 #### 14. To list nodes
        kubectl get nodes
 #### 15. To delete cluster
-       kops delete cluster demo.k8s.valaxy.net --yes
+       kops delete cluster demo.k8s.jitrobittikaka.com --yes
 
 # Deploying Nginx pods on Kubernetes
 #### Deploying Nginx Container
