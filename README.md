@@ -105,17 +105,34 @@
     useradd ansadmin
     passwd ansadmin
     visudo # enable ansadmin to access sudo without password
+    copy /home/dockadmin/* /home/ansadmin
+    su - ansadmin
+    sudo usermod -aG docker ansadmin
+    sudo chown -R ansadmin:ansadmin .
+    # Install Docker on Ansible server
+    yum install docker -y
+    systemctl start docker
+    su - ansadmin
+    sudo usermod -aG docker ansadmin
+    sudo chown -R ansadmin:ansadmin .
+    # Create Docker folder
+    su - ansadmin
+    sudo mkdir /opt/docker #Create docker folder
+    cd /opt/docker
+    sudo usermod -aG docker ansadmin
+    sudo chown -R ansadmin:ansadmin .
     # Create Hosts on ansadmin
-    mkdir /opt/docker #Create docker folder
-    vim /opt/docker/hosts #Create hosts
+    vim /opt/docker/hosts #Create hosts file and put all hosts inside
+        [local]
         localhost
+        [docker]
         {docker-privateIP}
     # Create SSH connection to docker server & localhost
     ssh-keygen
     ssh-copy-id ansadmin@{docker-privateIP} #Create connection to docker-server
-    ssh -i ansadmin@{docker-privateIP} #Connection test
-    ssh -i localhost #Create connection to localhost
-    ssh -i localhost #Connection test to localhost
+    ssh ansadmin@{docker-privateIP} #Connection test
+    ssh localhost #Create connection to localhost
+    ssh localhost #Connection test to localhost
     # install docker on Ansible server
     yum install docker -y
     
