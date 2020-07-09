@@ -49,6 +49,22 @@
     # instal clean package
     # create Tomcat Credentials from the rolename we've create before (deployer), followed with tomcat ip
     # Build now !
+#### Open Tomcat server !
+    # {ip-public}:8080/webapp
+
+## Step 3 Create new Project > Deploy with Docker :
+#### Install Linux on AWS EC2 Instance
+#### Create User for docker admin
+    useradd dockadmin
+    passwd dockadmin
+    visudo # add dockadmin to enable cmd login without cmd password
+    vim /etc/ssh/sshd_config # enable password auth from outside access
+    
+#### Install Docker
+    yum install java-1.8* -y
+#### Install Tomcat on Linux server 
+
+
 
 ##### Install 
     Source : https github repo
