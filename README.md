@@ -2,34 +2,53 @@
 # GitHub, Jenkins, Maven, and Tomcat on AWS Amazon EC2.
 
 ## Step 1 (Install Tools):
-####* Install Linux on AWS EC2 Instance
+#### 1. Install Linux on AWS EC2 Instance
     Please make sure to enable incoming traffic from port 22(SSH), 80(HTTP), and 443(HTTPS) on Security Group !
-####* Install Java, Git, & Maven (https://maven.apache.org/download.cgi)
+#### 2. Install Java, Git, & Maven (https://maven.apache.org/download.cgi)
     yum install java-1.8*
     yum install git
-#### *Install Jenkins on Linux server (https://www.jenkins.io/download/)
-#### Start Jenkins
+#### 3. Install Jenkins on Linux server (https://www.jenkins.io/download/)
+#### 4. Start Jenkins
     systemctl start jenkins
-#### Open Jenkins (Use Jenkins IP-public on EC2 Instance !)
+#### 5. Open Jenkins (Use Jenkins IP-public on EC2 Instance !)
     {ip-public}:8080 # put it on your browser !
     cat /var/lib/jenkins/secrets/initialAdminPassword #copy Jenkin's password !
-#### Associate Java & Maven on Jenkins
+#### 6. Associate Java & Maven on Jenkins
     find / -name javac
     vim .bash_profile
-#### Install these plugin on Jenkins :
+#### 7. Install these plugin on Jenkins :
     Maven Integration Plugin
     Maven Invoker Plugin
     Deploy to Container
-#### Create new Project
+#### 8. Create new Project
     please test your installation with new freestyle project first !
-#### Create new Maven-Project
+#### 9. Create new Maven-Project
     Source : https github repo
 
 ## Step 2 Create new Project > Deploy to Tomcat Server :
 #### Install Linux on AWS EC2 Instance
-#### Install Tomcat on Linux server
-
-
+#### Install Java 8 or 11
+    yum install java-1.8* -y
+#### Install Tomcat on Linux server (https://tomcat.apache.org/download-90.cgi)
+    cd /opt/tomcat/bin
+    chmod +x startup.sh
+    ./startup.sh
+    # comment on --> /opt/tomcat9/webapps/manager/META-INF/context.xml
+    # modify --> conf/tomcat-users.xml
+        <role rolename="manager-gui"/>
+        <role rolename="manager-jmx"/>
+        <role rolename="manager-status"/>
+        <role rolename="manager-script"/>
+        <user username="tomcat" password="tomcat123" roles="manager-gui, manager-status, manager-jmx, manager-script"/>
+        <user username="deployer" password="deployer" roles="manager-script"/>
+        <user username="role1" password="role1" roles="role1"/>
+#### Open Tomcat server with it's IP-Public followed by port 8080 !
+    # {ip-public}:8080
+#### Create New Project "Deploy **.war file on Tomcat server"
+    # put github repo of maven-project
+    # instal clean package
+    # create Tomcat Credentials from the rolename we've create before (deployer), followed with tomcat ip
+    # Build now !
 
 ##### Install 
     Source : https github repo
