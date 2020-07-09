@@ -76,9 +76,9 @@
     # Manage Jenkins > Configure System > SSH Server
     # Put Docker private IP, then test configuration !
     # Open the Project > Post Build Actions > Send build artifacts over SSH > select the Docker Server we've create before !
-    # Source File : webapp/target/*.war
-    # Remove prefix : webapp/target
-    # Remote Directory : .
+        Source File : webapp/target/*.war
+        Remove prefix : webapp/target
+        Remote Directory : .
     # Save, then Build Now !
 #### Create Dockerfile
     FROM tomcat:latest
@@ -101,6 +101,10 @@
     passwd ansadmin
     visudo # enable ansadmin to access sudo without password
     vim /etc/ssh/sshd_config #Enable password auth from outside access
+    # Create hosts file on root
+    vim /etc/ansible/hosts
+        localhost
+        {docker-privateIP}
     # add user ansadmin on Docker server !
     useradd ansadmin
     passwd ansadmin
@@ -119,7 +123,6 @@
     su - ansadmin
     sudo mkdir /opt/docker #Create docker folder
     cd /opt/docker
-    sudo usermod -aG docker ansadmin
     sudo chown -R ansadmin:ansadmin .
     # Create Hosts on ansadmin
     vim /opt/docker/hosts #Create hosts file and put all hosts inside
@@ -131,10 +134,39 @@
     ssh-keygen
     ssh-copy-id ansadmin@{docker-privateIP} #Create connection to docker-server
     ssh ansadmin@{docker-privateIP} #Connection test
-    ssh localhost #Create connection to localhost
+    ssh-copy-id localhost #Create connection to localhost
     ssh localhost #Connection test to localhost
-    # install docker on Ansible server
-    yum install docker -y
+    # Ansible ping test on hosts
+    ansible all -m ping
+    # Create/copy Dockerfile from Docker server to /opt/docker directory
+    # Put webapp.war file on /opt/docker directory
+        Source File : webapp/target/*.war
+        Remove prefix : webapp/target
+        Remote Directory : //opt//docker
+    # Create Ansible CI file for docker host
+    vim /opt/docker/CI-docker.yml
+        ---
+        - name: upload image to dockerhub
+          hosts: local
+          become: true
+          user: ansadmin
+          tasks:
+            - name: create docker image
+              command: docker build -t myimg .
+              args:
+                chdir: /opt/docker
+            - name: tag docker image
+              command: docker tag myimg rootdock/myimg:1.4
+            - name: push docker image to dockerhub
+              command: docker push rootdock/myimg
+            - name: remove image
+              command: docker rmi myimg:latest rootdock/myimg:1.4
+    # Login your dockerhub credential login with:
+    docker login
+    # Run Ansible Playbook for CI-docker
+    ansible-playbook -i hosts CI-docker.yml
+    
+          
     
 
 
