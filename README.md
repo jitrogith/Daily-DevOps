@@ -67,9 +67,19 @@
     cat /etc/group # find-put docker in group
     usermod -aG docker dockadmin # put dockadm on docker group
     chown -R dockadmin dockadmin .
-#### Install these plugin on Jenkins :
+#### Install this plugin on Jenkins :
     Publish over SSH
-
+#### Lets put **.war file on to Docker server :
+    cd /var/lib/jenkins/workspace/{project-name}/webapp
+    # compare it with origin repo, while it has no target folder & **.war file !
+    # Create New Project on Jenkins to put **.war file first on Docker server
+    # Manage Jenkins > Configure System > SSH Server
+    # Put Docker private IP, then test configuration !
+    # Open the Project > Post Build Actions > Send build artifacts over SSH > select the Docker Server we've create before !
+    # Source File : webapp/target/*.war
+    # Remove prefix : webapp/target
+    # Remote Directory : .
+    # Save, then Build Now !
 
 #### Install Docker
     yum install java-1.8* -y
