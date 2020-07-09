@@ -139,16 +139,18 @@
     # Ansible ping test on hosts
     ansible all -m ping
     # Create/copy Dockerfile from Docker server to /opt/docker directory
+    # Create Ansible Server as SSH Publisher
+        Manage Jenkins > System Configure > SSH Server
     # Put webapp.war file on /opt/docker directory
+        SSH Server : Ansible Server
         Source File : webapp/target/*.war
         Remove prefix : webapp/target
-        Remote Directory : //opt//docker
-    # Create Ansible CI file for docker host
+        Remote Directory : //opt//docker   #Make sure use "//" not "/"
+    # Create Ansible-Playbook file for CI-docker
     vim /opt/docker/CI-docker.yml
         ---
         - name: upload image to dockerhub
           hosts: local
-          become: true
           user: ansadmin
           tasks:
             - name: create docker image
@@ -165,10 +167,37 @@
     docker login
     # Run Ansible Playbook for CI-docker
     ansible-playbook -i hosts CI-docker.yml
-    
-          
-    
-
+    # Check your dockerhub repo !
+    # Crate Ansible-Playbook file for CD-docker
+    vim /opt/docker/CD-docker.yml
+        ---
+        - name: pull & deploy image
+          hosts: docker
+          become: true
+          user: ansadmin
+          tasks:
+            - name: stop run container
+              command: docker stop mycontainer
+              ignore_errors: yes
+            - name: remove container
+              command: docker rm mycontainer
+              ignore_errors: yes
+            - name: remove image
+              command: docker rmi rootdock/myimg:1.4
+              ignore_errors: yes
+            - name: pull image from dockerhub
+              command: docker pull rootdock/myimg:1.4
+            - name: run image
+              command: docker run -d --name mycontainer -p 8080:8080 rootdock/myimg:1.4
+    # Create full CICD on Jenkins with Ansible playbook by put these command on "Exec Command":
+        ansible-playbook -i /opt/docker/hosts /opt/docker/CI-docker.yml; ansible-playbook -i /opt/docker/hosts /opt/docker/CD-docker.yml
+    # Build Triggers:
+        Configure > Build Triggers > Pull SCM > * * * * *  #Every minutes
+    # Let's try to change the source file
+        cd webapp/src/main/webapp
+        vim index.jsp
+        # Change text and bgcolor !
+    # HAPPY DEVOPS !
 
 
 #### Install Tomcat on Linux server 
