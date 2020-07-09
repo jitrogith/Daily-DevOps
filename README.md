@@ -200,15 +200,5 @@
     # HAPPY DEVOPS !
 
 
-#### Install Tomcat on Linux server 
+#### Step 4 : CICD Pipeline with Kubernetes
     
-
-
-##### Install 
-    Source : https github repo
-
-## Step 4 :
-#### Install Ubuntu on AWS EC2 as Tomcat WebServer
-
-#### Install these plugin on Jenkins :
-    Publish over SSH
