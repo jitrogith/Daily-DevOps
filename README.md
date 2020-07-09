@@ -2,8 +2,8 @@
 # GitHub, Jenkins, Maven, and Tomcat on AWS Amazon EC2.
 
 ## Step 1 (Install Tools):
-#### 1. Install Linux on AWS EC2 Instance
-    Please make sure to enable incoming traffic from port 22(SSH), 80(HTTP), and 443(HTTPS) on Security Group !
+#### 1. Launch new Linux server on AWS EC2 Instance
+    # Please make sure to enable incoming traffic from port 22(SSH), 80(HTTP), and 443(HTTPS) on Security Group !
 #### 2. Install Java, Git, & Maven (https://maven.apache.org/download.cgi)
     yum install java-1.8*
     yum install git
@@ -21,12 +21,12 @@
     Maven Invoker Plugin
     Deploy to Container
 #### 8. Create new Project
-    please test your installation with new freestyle project first !
+    # please test your installation with new freestyle project first !
 #### 9. Create new Maven-Project
-    Source : https github repo
+    # Source : https github repo
 
 ## Step 2 Create new Project > Deploy to Tomcat Server :
-#### Install Linux on AWS EC2 Instance
+#### Launch new Linux server AWS EC2 Instance
 #### Install Java 8 or 11
     yum install java-1.8* -y
 #### Install Tomcat on Linux server (https://tomcat.apache.org/download-90.cgi)
@@ -53,7 +53,7 @@
     # {ip-public}:8080/webapp
 
 ## Step 3 Create new Project > Deploy with Docker :
-#### Install Linux on AWS EC2 Instance
+#### Launch new Linux server AWS EC2 Instance
 #### Create User for docker admin
     useradd dockadmin
     passwd dockadmin
@@ -80,9 +80,48 @@
     # Remove prefix : webapp/target
     # Remote Directory : .
     # Save, then Build Now !
+#### Create Dockerfile
+    FROM tomcat:latest
+    MAINTAINER coelgber
+    COPY *.war /usr/local/tomcat/webapps
+#### Build your Image
+    docker build -t myimg .
+    docker run -d --name mycontainer -p 8080:8080 myimg
+    # Browse {public-ip}:8080/webapp
+#### Provisioning Docker with Ansible
+    # Launch new Linux server on AWS EC2 Instance
+    # Install Ansible on Linux server
+    yum install python -y
+    yum update -y
+    yum install python-pip
+    pip install ansible
+    ansible --version
+    # Create user for ansadmin
+    useradd ansadmin
+    passwd ansadmin
+    visudo # enable ansadmin to access sudo without password
+    vim /etc/ssh/sshd_config #Enable password auth from outside access
+    # add user ansadmin on Docker server !
+    useradd ansadmin
+    passwd ansadmin
+    visudo # enable ansadmin to access sudo without password
+    # Create Hosts on ansadmin
+    mkdir /opt/docker #Create docker folder
+    vim /opt/docker/hosts #Create hosts
+        localhost
+        {docker-privateIP}
+    # Create SSH connection to docker server & localhost
+    ssh-keygen
+    ssh-copy-id ansadmin@{docker-privateIP} #Create connection to docker-server
+    ssh -i ansadmin@{docker-privateIP} #Connection test
+    ssh -i localhost #Create connection to localhost
+    ssh -i localhost #Connection test to localhost
+    # install docker on Ansible server
+    yum install docker -y
+    
 
-#### Install Docker
-    yum install java-1.8* -y
+
+
 #### Install Tomcat on Linux server 
     
 
