@@ -57,13 +57,24 @@
 #### Create User for docker admin
     useradd dockadmin
     passwd dockadmin
-    visudo # add dockadmin to enable cmd login without cmd password
+    visudo # enable dockadmin to access sudo without password
     vim /etc/ssh/sshd_config # enable password auth from outside access
-    
+#### Docker credential
+    docker images # check docker images on root
+    su dockadmin # login to user dockadmin
+    docker images # check docker images on dockadmin
+    id dockadmin # find-out dockadmin group status
+    cat /etc/group # find-put docker in group
+    usermod -aG docker dockadmin # put dockadm on docker group
+    chown -R dockadmin dockadmin .
+#### Install these plugin on Jenkins :
+    Publish over SSH
+
+
 #### Install Docker
     yum install java-1.8* -y
 #### Install Tomcat on Linux server 
-
+    
 
 
 ##### Install 
