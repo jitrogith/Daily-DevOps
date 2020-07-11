@@ -15,8 +15,13 @@
     {ip-public}:8080 # put it on your browser !
     cat /var/lib/jenkins/secrets/initialAdminPassword #copy Jenkin's password !
 #### 6. Associate Java & Maven on Jenkins
+    # Download Maven, then save it on /opt/maven
     find / -name javac
     vim .bash_profile
+        JAVA_HOME={java_directory}
+        M2=/opt/maven
+        M2_HOME=$M2/bin
+        PATH=$JAVA_HOME:$M2:$M2_HOME
 #### 7. Install these plugin on Jenkins :
     Maven Integration Plugin
     Maven Invoker Plugin
