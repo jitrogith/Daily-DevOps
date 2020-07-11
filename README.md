@@ -5,6 +5,7 @@
 #### 1. Launch new Linux server on AWS EC2 Instance
     # Please make sure to enable incoming traffic from port 22(SSH), 80(HTTP), and 443(HTTPS) on Security Group !
 #### 2. Install Java, Git, & Maven (https://maven.apache.org/download.cgi)
+    yum update -y
     yum install java-1.8*
     yum install git
 #### 3. Install Jenkins on Linux server (https://www.jenkins.io/download/)
