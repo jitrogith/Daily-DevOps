@@ -52,7 +52,7 @@
     # {ip-public}:8080
 #### Create New Project "Deploy **.war file on Tomcat server"
     # put github repo of maven-project
-    # instal clean package
+    # install clean package
     # create Tomcat Credentials from the rolename we've create before (deployer), followed with tomcat ip
     # Build now !
 #### Open Tomcat server !
@@ -73,8 +73,9 @@
     cat /etc/group # find-put docker in group
     usermod -aG docker dockadmin # put dockadm on docker group
     chown -R dockadmin dockadmin .
-#### Install this plugin on Jenkins :
-    Publish over SSH
+#### Install Jenkins plugin & apply Docker server :
+    # Plugin : Publish over SSH
+    # Apply Docker server on SSH publisher
 #### Lets put **.war file on to Docker server :
     cd /var/lib/jenkins/workspace/{project-name}/webapp
     # compare it with origin repo, while it has no target folder & **.war file !
