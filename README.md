@@ -234,9 +234,18 @@
     On Route53 :
         Create Hosted Zone with our domain name (select Private Hosted zone)
         Apply name-servers to our DNS hosting
+    Configure AWS CLI
+        aws configure
     Create bucket on S3 with our domain name
+        aws s3 mb s3://demo.k8s.myshop81.com
     Create ssh-keygen
-    
+        ssh-keygen
+    Create k8s cluster:
+        export KOPS_STATE_STORE=s3://demo.k8s.myshop81.com
+        aws ec2 describe-availability-zones
+        kops create cluster --cloud=aws --zones=ap-southeast-1a,ap-southeast-1b,ap-southeast-1c --name=demo.k8s.myshop81.com --dns-zone=myshop81.com --dns private
+        
+        
 
 
 
