@@ -210,11 +210,11 @@
 ## Step 4 : CICD Pipeline with Kubernetes
 #### Install Linux server on AWS EC2 Instance
     Create Roles that allow these Policies, then attach them on instance :
-        AmazonEC2FullAccess
-        IAMFullAccess
-        AmazonS3FullAccess
-        AmazonRoute53FullAccess
-        AmazonVPCFullAccess
+        #AmazonEC2FullAccess
+        #IAMFullAccess
+        #AmazonS3FullAccess
+        #AmazonRoute53FullAccess
+        #AmazonVPCFullAccess
     Install AWS-CLI to enable remote AWS from our CLI command
         curl https://s3.amazonaws.com/aws-cli/awscli-bundle.zip -o awscli-bundle.zip
         yum update -y
@@ -232,8 +232,8 @@
         chmod +x kops-linux-amd64
         sudo mv kops-linux-amd64 /usr/local/bin/kops
     On Route53 :
-        Create Hosted Zone with our domain name (select Private Hosted zone)
-        Apply name-servers to our DNS hosting
+        #Create Hosted Zone with our domain name (select Private Hosted zone)
+        #Apply name-servers to our DNS hosting
     Configure AWS CLI
         aws configure
     Create bucket on S3 with our domain name
@@ -244,7 +244,13 @@
         export KOPS_STATE_STORE=s3://demo.k8s.myshop81.com
         aws ec2 describe-availability-zones
         kops create cluster --cloud=aws --zones=ap-southeast-1a,ap-southeast-1b,ap-southeast-1c --name=demo.k8s.myshop81.com --dns-zone=myshop81.com --dns private
-        
+    Edit Master Node
+        kops edit ig --name=demo.k8s.myshop81.com master-ap-southeast-1a
+    Edit Worker Node
+        kops edit ig --name=demo.k8s.myshop81.com nodes
+    Final configure/update cluster
+        kops update cluster --name demo.k8s.myshop81.com --yes
+    
         
 
 
