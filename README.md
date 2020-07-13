@@ -207,5 +207,39 @@
     # HAPPY DEVOPS !
 
 
-#### Step 4 : CICD Pipeline with Kubernetes
+## Step 4 : CICD Pipeline with Kubernetes
+#### Install Linux server on AWS EC2 Instance
+    Create Roles that allow these Policies, then attach them on instance :
+        AmazonEC2FullAccess
+        IAMFullAccess
+        AmazonS3FullAccess
+        AmazonRoute53FullAccess
+        AmazonVPCFullAccess
+    Install AWS-CLI to enable remote AWS from our CLI command
+        curl https://s3.amazonaws.com/aws-cli/awscli-bundle.zip -o awscli-bundle.zip
+        yum update -y
+        yum install unzip
+        yum install python -y
+        unzip awscli-bundle.zip
+        #sudo yum-get install unzip - if you dont have unzip in your system
+        ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+    Install Kubeclt to enable Kubectl command and control k8s cluster
+        curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+        chmod +x ./kubectl
+        sudo mv ./kubectl /usr/local/bin/kubectl
+    Install KOPS to enable AWS create Kubernetes cluster
+        curl -LO https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+        chmod +x kops-linux-amd64
+        sudo mv kops-linux-amd64 /usr/local/bin/kops
+    On Route53 :
+        Create Hosted Zone with our domain name (select Private Hosted zone)
+        Apply name-servers to our DNS hosting
+    Create bucket on S3 with our domain name
+    Create ssh-keygen
     
+
+
+
+
+
+
