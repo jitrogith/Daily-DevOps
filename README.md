@@ -251,7 +251,8 @@
     Final configure/update cluster
         kops update cluster --name demo.k8s.myshop81.com --yes
     
-        
+    Remote Master Node:
+        ssh -i .ssh/id_rsa admin@api.demo.k8s.myshop81.com
 
 
 
